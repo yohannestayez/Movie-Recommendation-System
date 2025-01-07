@@ -3,3 +3,4 @@ pandas
 numpy
 py2neo
 networkx
+graphdatascience
