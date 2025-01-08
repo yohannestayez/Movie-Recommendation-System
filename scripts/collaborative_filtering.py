@@ -1,6 +1,8 @@
 from neo4j import GraphDatabase
 import sys
 sys.path.append('utils')
+from config import NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD
+
 class CollaborativeFiltering:
     def __init__(self, uri, user, password):
         self.driver = GraphDatabase.driver(uri, auth=(user, password))
@@ -30,11 +32,10 @@ class CollaborativeFiltering:
     
 
 if __name__ == "__main__":
-    from config import NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD
-
     cf = CollaborativeFiltering(NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD)
     try:
-        recommendations = cf.recommend_movies(user_id='49')
+        user_id = input("Enter the user id: ").strip()
+        recommendations = cf.recommend_movies(user_id)
         print("Collaborative Filtering Recommendations:", recommendations)
     finally:
         cf.close()
