@@ -25,8 +25,8 @@ class RecommendationSystem:
 if __name__ == "__main__":
     recommender = RecommendationSystem()
     try:
-        user_id = '100'
+        user_id = input("Enter User ID: ").strip()
         recommendations = recommender.recommend(user_id)
-        print("Final Recommendations:", recommendations)
+        print("Recommendations:", recommendations)
     finally:
         recommender.close()
