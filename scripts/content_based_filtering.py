@@ -1,6 +1,7 @@
 from neo4j import GraphDatabase
 import sys
 sys.path.append('utils')
+from config import NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD
 
 class ContentBasedFiltering:
     def __init__(self, uri, user, password):
@@ -28,11 +29,10 @@ class ContentBasedFiltering:
     
 
 if __name__ == "__main__":
-    from config import NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD
-
     cbf = ContentBasedFiltering(NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD)
     try:
-        recommendations = cbf.recommend_movies(user_id='1')
-        print("Content-Based Recommendations:", recommendations)
+        user_id = input("Enter the user id: ").strip()
+        recommendations = cbf.recommend_movies(user_id)
+        print("Content-Based Recommendations: ", recommendations)
     finally:
         cbf.close()
