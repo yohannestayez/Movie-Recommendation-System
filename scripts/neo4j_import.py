@@ -14,7 +14,7 @@ def load_movies(connector):
     LOAD CSV WITH HEADERS FROM 'file:///movies_cleaned.csv' AS row
     MERGE (m:Movie {id: row.id})
     SET m.title = row.title,
-        m.genres = row.genres,
+        m.genres = apoc.convert.fromJsonList(row.genres), 
         m.release_year = toInteger(row.release_year),
         m.popularity = toFloat(row.popularity),
         m.vote_average = toFloat(row.vote_average),
